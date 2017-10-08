@@ -1,7 +1,7 @@
 ## SI 206 W17 - Project 2
 
 ## COMMENT HERE WITH:
-## Your name:
+## Your name: Alyson Rosenberg
 ## Anyone you worked with on this project:
 
 ## Below we have provided import statements, comments to separate out the 
@@ -27,14 +27,13 @@ from bs4 import BeautifulSoup
 ## find_urls("the internet is awesome #worldwideweb") should return [], empty list
 
 def find_urls(s):
-    pass
-    #Your code here
-
+    return re.findall(r'(http[^\s]?://[^\s]+[.]..[^\s]+)', s)
+    
 
 
 ## PART 2  - Define a function grab_headlines.
 ## INPUT: N/A. No input.
-## Grab the headlines from the "Most Read" section of 
+## Grab the headlines from the "Most Read2" section of 
 ## http://www.michigandaily.com/section/opinion
 
 def grab_headlines():
