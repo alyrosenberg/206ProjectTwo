@@ -37,11 +37,13 @@ def find_urls(s):
 ## http://www.michigandaily.com/section/opinion
 
 def grab_headlines():
-    pass
-    #Your code here
+    url = (requests.get('http://www.michigandaily.com/section/opinion').text)
+    soup = BeautifulSoup(url, "html.parser")
+    titlesandhtml = soup.find_all('ol')
+    anchors = [td.findAll('a') for td in soup.findAll('ol')][0]
+    return [a.get_text() for a in anchors]
 
-
-
+    
 ## PART 3 (a) Define a function called get_umsi_data.  It should create a dictionary
 ## saved in a variable umsi_titles whose keys are UMSI people's names, and whose 
 ## associated values are those people's titles, e.g. "PhD student" or "Associate 
@@ -54,8 +56,18 @@ def grab_headlines():
 ## requests.get(base_url, headers={'User-Agent': 'SI_CLASS'}) 
 
 def get_umsi_data():
-    pass
-    #Your code here
+    namesandposition = {}
+    base_url = "https://www.si.umich.edu/directory?field_person_firstname_value=&field_person_lastname_value=&rid=All&page="
+    pageindices = [""]
+    pageindices.append(range(1,13))
+    soup = ""
+    for pageindex in pageindices:
+        pageraw = requests.get(base_url+str(pageindex), headers={'User-Agent': 'SI_CLASS'}).text
+        soup = BeautifulSoup(pageraw, 'html.parser')
+
+
+
+
 
 ## PART 3 (b) Define a function called num_students.  
 ## INPUT: The dictionary from get_umsi_data().
