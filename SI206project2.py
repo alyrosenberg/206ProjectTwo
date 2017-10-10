@@ -59,22 +59,38 @@ def get_umsi_data():
     namesandposition = {}
     base_url = "https://www.si.umich.edu/directory?field_person_firstname_value=&field_person_lastname_value=&rid=All&page="
     pageindices = [""]
-    pageindices.append(range(1,13))
+    for i in range(1,13):
+        pageindices.append(i)
     soup = ""
+    nametitledic = {}
     for pageindex in pageindices:
         pageraw = requests.get(base_url+str(pageindex), headers={'User-Agent': 'SI_CLASS'}).text
         soup = BeautifulSoup(pageraw, 'html.parser')
-
-
-
+        titleanchors = [td.findAll('div', attrs={'class': "field-item even", 'href': None, 'a href': None, 'img alt': None, 'src': None}) for td in soup.findAll('div')][0]
+        rawtext = [a.get_text() for a in titleanchors]
+        titles = []
+        for item in rawtext:
+            if "." in item or "\n" in item:
+                x = 5
+            else:
+                titles.append(item)
+        pagenametitledic = {titles[2*i]:titles[2*i+1] for i in range(0, int(len(titles)/2))}
+        for key in pagenametitledic.keys():
+            nametitledic[key] = pagenametitledic[key]
+    return nametitledic
 
 
 ## PART 3 (b) Define a function called num_students.  
 ## INPUT: The dictionary from get_umsi_data().
 ## OUTPUT: Return number of PhD students in the data.  (Don't forget, I may change the input data)
 def num_students(data):
-    pass
-    #Your code here
+    x = 0
+    for position in data.values():
+        if position == 'PhD student':
+            x += 1
+    return x
+
+
 
 
 
