@@ -15,11 +15,9 @@ import requests
 import re
 from bs4 import BeautifulSoup
 
-
 ## Part 1 -- Define your find_urls function here.
 ## INPUT: any string
 ## RETURN VALUE: a list of strings that represents all of the URLs in the input string
-
 
 ## For example: 
 ## find_urls("http://www.google.com is a great site") should return ["http://www.google.com"]
@@ -29,8 +27,6 @@ from bs4 import BeautifulSoup
 def find_urls(s):
     return re.findall(r'(http[^\s]?://[^\s]+[.]..[^\s]+)', s)
     
-
-
 ## PART 2  - Define a function grab_headlines.
 ## INPUT: N/A. No input.
 ## Grab the headlines from the "Most Read2" section of 
@@ -79,7 +75,6 @@ def get_umsi_data():
             nametitledic[key] = pagenametitledic[key]
     return nametitledic
 
-
 ## PART 3 (b) Define a function called num_students.  
 ## INPUT: The dictionary from get_umsi_data().
 ## OUTPUT: Return number of PhD students in the data.  (Don't forget, I may change the input data)
@@ -89,10 +84,6 @@ def num_students(data):
         if position == 'PhD student':
             x += 1
     return x
-
-
-
-
 
 ########### TESTS; DO NOT CHANGE ANY CODE BELOW THIS LINE! ###########
 def test(got, expected, pts):
